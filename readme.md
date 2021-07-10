@@ -1,4 +1,4 @@
-##### Notes about the fork
+### Notes about the fork
 
 We've added the implementation of MLP, LSTM, Gradient boosting and AutoGluon regressors.
 These algorithms got tested on this benchmark in the context of a work to be submitted at the International Conference on Machine Learning and Applications (ICMLA).
