@@ -11,11 +11,12 @@ from utils.data_processor import uniform_scaling
 
 name = "RegressorTools"
 
-classical_ml_models = ["xgboost", "svr", "random_forest"]
-deep_learning_models = ["fcn", "resnet", "inception"]
+classical_ml_models = ["xgboost", "svr", "random_forest", "teamc"]
+deep_learning_models = ["fcn", "resnet", "inception", "mlp", "lstm"]
 tsc_models = ["rocket"]
+automl_models = ["autogluon"]
 linear_models = ["lr", "ridge"]
-all_models = classical_ml_models + deep_learning_models + tsc_models
+all_models = classical_ml_models + deep_learning_models + tsc_models + automl_models
 
 
 def fit_regressor(output_directory, regressor_name, X_train, y_train,
@@ -67,11 +68,15 @@ def create_regressor(regressor_name, input_shape, output_directory, verbose=1, i
     if regressor_name == "inception":
         from models.deep_learning import inception
         return inception.InceptionTimeRegressor(output_directory, input_shape, verbose)
-
+    if regressor_name == "mlp":
+        from models.deep_learning import mlp
+        return mlp.MLPRegressor(output_directory, input_shape[-1]*2, verbose)
+    if regressor_name == "lstm":
+        from models.deep_learning import lstm
+        return lstm.LSTMRegressor(output_directory, input_shape, verbose)
     if regressor_name == "rocket":
         from models import rocket
         return rocket.RocketRegressor(output_directory)
-
     # classical ML models
     if regressor_name == "xgboost":
         from models.classical_models import XGBoostRegressor
@@ -91,7 +96,9 @@ def create_regressor(regressor_name, input_shape, output_directory, verbose=1, i
     if regressor_name == "svr":
         from models.classical_models import SVRRegressor
         return SVRRegressor(output_directory, verbose)
-
+    if regressor_name == "teamc":
+        from models import teamc
+        return teamc.TeamCRegressor(output_directory)
     # linear models
     if regressor_name == "lr":
         from models.classical_models import LinearRegressor
@@ -104,6 +111,12 @@ def create_regressor(regressor_name, input_shape, output_directory, verbose=1, i
         kwargs = {"fit_intercept": True,
                   "normalize": False}
         return LinearRegressor(output_directory, kwargs, type=regressor_name)
+    # autoML models
+    if regressor_name == "autogluon":
+        from models import autogluon
+        return autogluon.AutoGluonRegressor(output_directory)
+    else:
+        raise Exception('No regressor named {}.'.format(regressor_name))
 
 
 def process_data(X, min_len, normalise=None):

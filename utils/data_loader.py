@@ -77,7 +77,7 @@ def load_from_tsfile_to_dataframe(full_file_path_and_name, return_separate_X_and
 
     # Parse the file
     # print(full_file_path_and_name)
-    with open(full_file_path_and_name, 'r', encoding='utf-8') as file:
+    with open(full_file_path_and_name, 'r', encoding='ISO-8859-1') as file:
         for line in tqdm(file):
             # print(".", end='')
             # Strip white space from start/end of line and change to lowercase for use below
