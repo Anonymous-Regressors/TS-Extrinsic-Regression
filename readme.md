@@ -1,7 +1,7 @@
 ### Notes about the fork
 
-We've added the implementation of MLP, LSTM, Gradient boosting and AutoGluon regressors.
-These algorithms got tested on this benchmark in the context of a work to be submitted at the International Conference on Machine Learning and Applications (ICMLA).
+We've added the implementation of [MLP](models/deep_learning/mlp.py), [LSTM](models/deep_learning/lstm.py), [Gradient boosting](models/teamc.py) and [AutoGluon](models/autogluon.py) regressors.
+These algorithms got tested on this benchmark in the context of a work to be submitted at the [International Conference on Machine Learning and Applications](https://www.icmla-conference.org/) (ICMLA).
 
 # Time Series Extrinsic Regression
 This repository contains the source code for ``Time Series Extrinsic Regression`` (TSER).
